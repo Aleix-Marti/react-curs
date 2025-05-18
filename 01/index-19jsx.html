@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>React 19 - Exemple Simple</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+    
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    
+    h1 {
+      color: #1976d2;
+    }
+    
+    p {
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    .counter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+    
+    button {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 0 5px;
+    }
+    
+    button:hover {
+      background-color: #1565c0;
+    }
+    
+    .display {
+      margin: 0 15px;
+      font-size: 20px;
+      font-weight: bold;
+      min-width: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="module">
+    // Importem les dependències de React 19 des d'esm.sh
+    import React from 'https://esm.sh/react@19.1.0';
+    import { createRoot } from 'https://esm.sh/react-dom@19.1.0/client';
+
+    // Funció pel comptador
+    function Counter() {
+      const [count, setCount] = React.useState(0);
+      
+      return React.createElement('div', { className: 'container' },
+        React.createElement('h1', null, 'React 19 - Exemple de Comptador'),
+        React.createElement('p', null, 'Aquest és un exemple simple utilitzant React 19 amb ESM directament en el navegador.'),
+        
+        React.createElement('div', { className: 'counter' },
+          React.createElement('button', { 
+            onClick: () => setCount(prev => prev - 1) 
+          }, '-'),
+          
+          React.createElement('span', { className: 'display' }, count),
+          
+          React.createElement('button', { 
+            onClick: () => setCount(prev => prev + 1) 
+          }, '+')
+        ),
+        
+        React.createElement('p', null, 'Prova a incrementar o decrementar el comptador!')
+      );
+    }
+
+    // Esperem a que el document estigui carregat
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('root');
+      const root = createRoot(container);
+      // Renderitzem el nostre component
+      root.render(React.createElement(Counter));
+    });
+  </script>
+</body>
+</html>

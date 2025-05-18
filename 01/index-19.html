@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>React 19 amb importmap i JSX</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@19.1.0",
+      "react-dom": "https://esm.sh/react-dom@19.1.0",
+      "react-dom/client": "https://esm.sh/react-dom@19.1.0/client"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="module">
+    import React from "react";
+    import { createRoot } from "react-dom/client";
+    
+    // Esperem que el DOM s'hagi carregat completament
+    window.addEventListener('DOMContentLoaded', () => {
+      // Definim un component amb createElement (sense JSX)
+      function App() {
+        return React.createElement(
+          "div", 
+          { style: { padding: "20px", fontFamily: "Arial" } },
+          React.createElement("h1", null, "Hola, món!"),
+          React.createElement("p", null, "Aquest és un exemple amb React 19, importmap i createElement!"),
+          React.createElement("button", 
+            { 
+              onClick: () => alert("React 19 funciona correctament!"),
+              style: { 
+                padding: "10px 15px", 
+                backgroundColor: "#0095ff",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer"
+              }
+            }, 
+            "Fes clic aquí!"
+          )
+        );
+      }
+      
+      // Creem l'arrel i renderitzem
+      const root = createRoot(document.getElementById('root'));
+      root.render(React.createElement(App, null));
+    });
+  </script>
+</body>
+</html>
