@@ -6,24 +6,36 @@
   <title>React HTML</title>
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head> 
 <body>
   <div id="root"></div>
 
-  <script type="text/babel">
+  <script>
 
-    const App = () => {
-        return (
-          <>
-            <h1>Hello World!</h1>
-            <h2>My first react app</h2>
-          </>
-        )
-      }
-    
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />)
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+
+    const hello = React.createElement("h1", null, "Hello React");
+    root.render(hello);
+
+    // const btn = React.createElement("button", {onClick: () => {alert("Hello react")}} , "clic me");
+    // root.render(btn);
+
+
+    // const btn = React.createElement("button", { "data-id": 123}, "Button 1")
+    // root.render(btn)
+
+    // const btn1 = React.createElement("button", { "data-id": 123}, "Button 1")
+    // const btn2 = React.createElement("button", { "data-id": 456}, "Button 2")
+    // const btn3 = React.createElement("button", { "data-id": 789}, "Button 3")
+
+    // root.render(btn1, btn2, btn3)
+
+    // const div = React.createElement("div", null, [btn1, btn2, btn3])
+    // root.render(div)
+
+    // const fragment = React.createElement(React.Fragment, null, [btn1, btn2, btn3])
+    // root.render(fragment)
+
 
   </script>
 </body>
