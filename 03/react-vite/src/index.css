@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  width: 200px;
+  max-height: 340px;
+  padding: 1rem;
+  background-color: aquamarine;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.card.active {
+  border-color: lime;
+}
+
+.card img {
+  object-fit: contain;
+  height: min(80%, 200px);
+  width: auto;
+}
