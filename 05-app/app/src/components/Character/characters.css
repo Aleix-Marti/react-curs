@@ -1,0 +1,117 @@
+.character {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow: hidden;
+  color: black;
+  border: 2px solid var(--card-color-alt);
+  border-radius: 6px;
+  background-color: white;
+  --card-color: #ffffff;
+  --card-color-alt: #ffffff80;
+  background-image: linear-gradient(135deg,var(--card-color), var(--card-color-alt));
+
+
+  & img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    filter: drop-shadow(2px 4px 6px black);
+  }
+
+  & .info-icon {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    z-index: 1;
+    &:hover ~ .info {
+      bottom: 0;
+    }
+  }
+
+  & .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    background: linear-gradient(transparent, black 60%, black);
+    color: white;
+    width: 100%;
+    height: 50%;
+    padding: 1rem;
+    bottom: -100%;
+    transition: bottom .3s;
+    p {
+      margin: 0;
+    }
+  }
+  /* &:hover .info {
+    bottom: 0;
+  } */
+  &.selected {
+    border-color: var(--card-color);
+    background-color: black;
+    box-shadow: 0 0 17px 2px var(--card-color);
+  }
+
+  &.frieza {
+    --card-color: #8450a5;
+    --card-color-alt: #8450a580;
+  }
+
+  &.namekian {
+    --card-color: #65b441;
+    --card-color-alt: #65b44180;
+  }
+  
+  &.android {
+    --card-color: #f8041a;
+    --card-color-alt: #f8041a80;
+  }
+
+  &.saiyan {
+    --card-color: #aeff00;
+    --card-color-alt: #aeff0080;
+  }
+
+  &.human {
+    --card-color: #ffd7bd;
+    --card-color-alt: #ffd7bd80;
+  }
+
+  &.majin {
+    --card-color: #ffbcb9;
+    --card-color-alt: #ffbcb980;
+  }
+
+  &.jiren {
+    --card-color: #ff1a2a;
+    --card-color-alt: #ff1a2a80;
+  }
+
+  &.nucleico {
+    --card-color: #ace0e9;
+    --card-color-alt: #ace0e980;
+  }
+
+  &.god {
+    --card-color: #ddc4eb;
+    --card-color-alt: #ddc4eb80;
+  }
+
+  &.evil {
+    --card-color: #f7d1fe;
+    --card-color-alt: #f7d1fe80;
+  }
+
+  &.angel {
+    --card-color: #89dcf7;
+    --card-color-alt: #89dcf780;
+  }
+}
+

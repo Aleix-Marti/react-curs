@@ -1,0 +1,45 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+}
+
+.characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.filters {
+  display: flex;
+}
+
+.races {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.races li {
+  position: relative;
+}
+
+input[name="races"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+li:has(label + input[name="races"]) label {
+  cursor: pointer;
+}
+
+li:has(label + input[name="races"]:checked) label {
+  color: lime;
+}
