@@ -7,10 +7,16 @@ p {
   margin: 0;
 }
 
+.section-cards {
+  max-width: 100%;
+}
+
 .cards {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
+  list-style: none;
 }
 
 .card {
