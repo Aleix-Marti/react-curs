@@ -5,7 +5,7 @@ import { GoogleGenAI } from "@google/genai";
 
 const Travel = () => {
 
-  const GEMINI_API_KEY = 'la_teva_clau_api'
+  const GEMINI_API_KEY = la_teva_api_key
 
   const [formData, setFormData] = useState({
     destination: '',
@@ -32,23 +32,23 @@ const Travel = () => {
   const generatePrompt = () => {
     return `Actua com un expert en viatges i crea una recomanació personalitzada de viatge amb la següent informació:
 
-Destinació: ${formData.destination}
-Durada: ${formData.duration}
-Pressupost: ${formData.budget}
-Nombre de viatgers: ${formData.travelers}
-Interessos: ${formData.interests}
-Època de l'any: ${formData.season}
-Tipus d'allotjament: ${formData.accommodation}
+    Destinació: ${formData.destination}
+    Durada: ${formData.duration}
+    Pressupost: ${formData.budget}
+    Nombre de viatgers: ${formData.travelers}
+    Interessos: ${formData.interests}
+    Època de l'any: ${formData.season}
+    Tipus d'allotjament: ${formData.accommodation}
 
-Proporciona una recomanació detallada que inclogui:
-1. Activitats principals recomanades
-2. Llocs d'interès imprescindibles
-3. Suggeriments gastronòmics
-4. Consells pràctics per al viatge
-5. Estimació de costos aproximats
-6. Millor època per visitar (si és rellevant)
+    Proporciona una recomanació detallada que inclogui:
+    1. Activitats principals recomanades
+    2. Llocs d'interès imprescindibles
+    3. Suggeriments gastronòmics
+    4. Consells pràctics per al viatge
+    5. Estimació de costos aproximats
+    6. Millor època per visitar (si és rellevant)
 
-Fes la resposta en català i sigues específic i pràctic.`;
+    Fes la resposta en català i sigues específic i pràctic.`;
   };
 
   const handleSubmit = async (e) => {
