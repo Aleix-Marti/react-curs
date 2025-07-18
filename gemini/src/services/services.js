@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = AIzaSyBSnb9YCAvy_okMdYm5cfzwLGKQHb8YM98;
+const API_KEY = la_teva_clau_api;
 // const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
 
 const API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent';
