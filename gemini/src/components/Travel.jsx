@@ -5,7 +5,7 @@ import { GoogleGenAI } from "@google/genai";
 
 const Travel = () => {
 
-  const GEMINI_API_KEY = 'AIzaSyBSnb9YCAvy_okMdYm5cfzwLGKQHb8YM98'
+  const GEMINI_API_KEY = 'la_teva_clau_api'
 
   const [formData, setFormData] = useState({
     destination: '',
