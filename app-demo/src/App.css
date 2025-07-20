@@ -119,6 +119,13 @@
     }
   }
 
+  & .character-info__combat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem
+  }
+
   & .more-info {
     color: #111;
   }
@@ -228,6 +235,13 @@
   & .character-info__info {
     grid-area: info;
     align-self: center;
+  }
+
+  & .character-info__combat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem
   }
 
 }

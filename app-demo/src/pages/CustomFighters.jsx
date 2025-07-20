@@ -1,24 +1,20 @@
 import { useState, useEffect } from 'react'
-import { getCharacters } from '@services/services.js'
-import Card from '@components/Card.jsx'
+import { getCustomFighters } from '@services/services.js'
+import FighterCard from '@components/FighterCard.jsx'
 import '@/App.css'
 
-function Characters() {
+function CustomFighters() {
   const [characters, setCharacters] = useState([])
   const [fighters, setFighters] = useState([])
   const [winner, setWinner] = useState('')
 
 
   useEffect( () => {      
-    
     const getData = async () => {
-      const allChars = await getCharacters()
+      const allChars = await getCustomFighters()
       setCharacters( allChars )
     }
-    
     getData()
-    
-
   }, [])
 
   const selectCard = (character) => {
@@ -36,7 +32,7 @@ function Characters() {
   }
 
   const fight = () => {
-    if ( fighters[0].ki > fighters[1].ki ) {
+    if ( fighters[0].attack > fighters[1].deffense ) {
       setWinner(fighters[0].name)
     } else {
       setWinner(fighters[1].name)
@@ -47,7 +43,9 @@ function Characters() {
 
   return (
     <>
-      <h1>DBZ Fighters</h1>
+      <h1>My Fighters</h1>
+
+              
 
       <section className="fighters">
         {fighters.length == 1 && <p>{fighters[0].name} vs ??</p>}
@@ -64,11 +62,12 @@ function Characters() {
       <section className="characters">
         {characters.map( character => {
           return (
-            <Card 
+            <FighterCard 
               key={character.id} 
               info={character}
               onSelect={ () => {selectCard(character)} }
               selected={ fighters.some( f => f.id === character.id ) }
+              iconcolor={'#000'}
             />
           )
         })}
@@ -77,4 +76,4 @@ function Characters() {
   )
 }
 
-export default Characters
+export default CustomFighters

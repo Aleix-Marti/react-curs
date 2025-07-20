@@ -11,6 +11,9 @@ function Navbar() {
       <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link>
       <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link>
       <Link to="/characters" className={location.pathname === '/characters' ? 'active' : ''}>Characters</Link>
+      <Link to="/customfighters" className={location.pathname === '/customfighters' ? 'active' : ''}>Custom Fighters</Link>
+      <Link to="/new" className={location.pathname === '/new' ? 'active' : ''}>Add New Figther</Link>
+      <Link to="/map" className={location.pathname === '/map' ? 'active' : ''}>Mapa</Link>
     </nav>
   )
 
