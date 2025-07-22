@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import MapPopup from '../components/MapPopup';
+import { getCustomFighters } from '../services/services';
 
 // Fix per als icones de Leaflet en React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -26,37 +28,19 @@ const CharacterMap = () => {
       setError(null);
       setStatus('Carregant personatges...');
       
-      const response = await fetch('https://retoolapi.dev/nJCkCJ/data');
-      
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
-      if (!Array.isArray(data)) {
-        throw new Error('La resposta no és un array vàlid');
-      }
-      
-      // Filtrar personatges amb coordenades vàlides
-      const validCharacters = data.filter(character => {
-        const lat = parseFloat(character.latitude);
-        const lng = parseFloat(character.longitude);
-        return !isNaN(lat) && !isNaN(lng) && 
-               lat >= -90 && lat <= 90 && 
-               lng >= -180 && lng <= 180;
-      });
-      
-      setCharacters(validCharacters);
-      setStatus(`${validCharacters.length} personatges carregats (${data.length} total)`);
-      
-      // Ajustar el centre del mapa si hi ha personatges
-      if (validCharacters.length > 0) {
-        const avgLat = validCharacters.reduce((sum, char) => sum + parseFloat(char.latitude), 0) / validCharacters.length;
-        const avgLng = validCharacters.reduce((sum, char) => sum + parseFloat(char.longitude), 0) / validCharacters.length;
+      const data = await getCustomFighters()
+      setCharacters(data);
+      setStatus('Personatges carregats');
+
+      if (data.length > 0) {
+        const avgLat = data.reduce((sum, char) => sum + parseFloat(char.latitude), 0) / data.length;
+        const avgLng = data.reduce((sum, char) => sum + parseFloat(char.longitude), 0) / data.length;
         setMapCenter([avgLat, avgLng]);
         setMapZoom(4);
       }
+
+      // setMapCenter([20, 3]);
+      // setMapZoom(4);
       
     } catch (err) {
       console.error('Error en obtenir els personatges:', err);
@@ -72,90 +56,9 @@ const CharacterMap = () => {
     fetchCharacters();
   }, []);
 
-  // Component per al contingut del popup
-  const CharacterPopup = ({ character }) => {
-    const {
-      img = '',
-      name = 'Sense nom',
-      attack = 0,
-      deffense = 0,
-      latitude = 0,
-      longitude = 0,
-      description = 'Sense descripció'
-    } = character;
-
-    return (
-      <div style={{ maxWidth: '280px', fontFamily: 'Arial, sans-serif' }}>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '12px', 
-          marginBottom: '12px' 
-        }}>
-          {img && (
-            <img 
-              src={img} 
-              alt={name} 
-              style={{ 
-                width: '50px', 
-                height: '50px', 
-                borderRadius: '50%', 
-                objectFit: 'cover', 
-                border: '2px solid #3b82f6' 
-              }}
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
-          )}
-          <h3 style={{ margin: 0, fontSize: '18px', color: '#333' }}>{name}</h3>
-        </div>
-        
-        <div style={{ 
-          display: 'flex', 
-          gap: '20px', 
-          justifyContent: 'space-between', 
-          margin: '12px 0', 
-          padding: '8px', 
-          background: '#f8f9fa', 
-          borderRadius: '4px' 
-        }}>
-          <div style={{ textAlign: 'center', flex: 1 }}>
-            <div style={{ fontSize: '12px', color: '#666', marginBottom: '2px' }}>Atac</div>
-            <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#dc3545' }}>{attack}</div>
-          </div>
-          <div style={{ textAlign: 'center', flex: 1 }}>
-            <div style={{ fontSize: '12px', color: '#666', marginBottom: '2px' }}>Defensa</div>
-            <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#28a745' }}>{deffense}</div>
-          </div>
-        </div>
-        
-        <div style={{ 
-          fontSize: '14px', 
-          color: '#555', 
-          lineHeight: '1.4', 
-          margin: '12px 0' 
-        }}>
-          {description}
-        </div>
-        
-        <div style={{ 
-          fontSize: '12px', 
-          color: '#888', 
-          textAlign: 'center', 
-          marginTop: '12px', 
-          paddingTop: '8px', 
-          borderTop: '1px solid #eee' 
-        }}>
-          📍 {parseFloat(latitude).toFixed(4)}, {parseFloat(longitude).toFixed(4)}
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div style={styles.container}>
-      <div style={styles.header}>
-        <h1 style={styles.title}>🗺️ Mapa de Personatges (React Leaflet)</h1>
-      </div>
+
       
       <div style={styles.controls}>
         <button 
@@ -165,6 +68,7 @@ const CharacterMap = () => {
         >
           {loading ? '🔄 Carregant...' : '🔄 Actualitzar Dades'}
         </button>
+        {loading ? '🔄 Carregant...' : 'Dades Carregades'}
         
         <div style={{
           ...styles.status,
@@ -198,7 +102,7 @@ const CharacterMap = () => {
                 title={character.name || 'Personatge sense nom'}
               >
                 <Popup maxWidth={320}>
-                  <CharacterPopup character={character} />
+                  <MapPopup character={character} />
                 </Popup>
               </Marker>
             );
